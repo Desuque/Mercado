@@ -1,15 +1,15 @@
 {
 * MercadoLibre de Bugs
-*
+* 
 * Grupo 5
-*
+* 
 * Gabriela Azcona - Sofia Morseletto - Mariano Stinson - Leandro Desuque - Leandro Devesa
-*
+*  
 }
-PROGRAM MercadoLibreBugs;
+program MercadoLibreBugs;
 USES crt,Validaciones;
 CONST
-  Amarillo = 14;
+	Amarillo = 14;
 	Blanco = 15;
 	Rojo = 4;
 	Verde=2;
@@ -149,13 +149,13 @@ BEGIN
 		if ((usuario) = Indice[posCentral].CampoClave) then
 			ExisteUsuario := true
 		else
-			if (usuario>Indice[posCentral].CampoClave) then
+			if (usuario>Indice[posCentral].CampoClave) then   
 				limInferior:=posCentral+1
 			else
 				limSuperior:=posCentral-1;
 	end;
 	If (ExisteUsuario) Then
-		PosicionUsuarioIndice := PosCentral
+		PosicionUsuarioIndice := PosCentral 
 	Else
 		PosicionUsuarioIndice := -1;
 END;
@@ -190,7 +190,7 @@ Begin
 		j:=1;
 		while (j <= TotalUsu - i) do
 		begin
-			if (Indice[j].CampoClave > Indice[j+1].CampoClave) then
+			if (Indice[j].CampoClave > Indice[j+1].CampoClave) then     
 			begin				
 				aux.Pos := Indice[j].Pos;
 				aux.CampoClave := Indice[j].CampoClave;
@@ -215,7 +215,7 @@ BEGIN
 	i := 1;
 	Assign(ArchUsu, DataFolder + 'ArchUsuarios.dat');
 	Reset(ArchUsu);
-	While (Not EOF(ArchUsu)) Do
+	While (Not EOF(ArchUsu)) Do 
 	Begin
 		Read(ArchUsu,auxUsu);
 		IndiceUsu[i].Pos := FilePos(ArchUsu) - 1;
@@ -421,11 +421,8 @@ VAR
 	Califico : boolean;
 BEGIN
 	Califico := false;
-	writeln('1');
 	Assign(ArchVentas,DataFolder + 'ArchVentas.dat');
-	writeln('2');
 	Reset(ArchVentas);
-	writeln('3');
 	While not EOF(ArchVentas) Do
 	BEGIN
 		Read(ArchVentas,Ventas);
@@ -462,7 +459,7 @@ BEGIN
 	Close(ArchVentas);
 END;
 {Procedimiento MercadoLibre de Bugs | Cambiar disponibilidad}
-Procedure PublicacionNoDisponible(var Publicacion : tPublic);
+Procedure PublicacionNoDisponible(var Publicacion : tPublic); 
 //acordarse ;););)
 Var
 	auto:t_Autos;
@@ -499,7 +496,7 @@ BEGIN
 END;
 {Procedimiento MercadoLibre de Bugs | Enviar mails}
 procedure EnviarMails(var vendedor:tUsuario; var comprador:tUsuario; var publicacion:tPublic);
-var
+var 
 	mail1:Text;
 	mail2:Text;
 BEGIN
@@ -508,7 +505,7 @@ BEGIN
 	Writeln(mail1,'De: ',vendedor.Mail);
 	Writeln(mail1,'A: ',comprador.Mail);
 	Writeln(mail1,'Asunto: ',publicacion.producto,' ',publicacion.id);
-	Writeln(mail1,'Felicitaciones, has comprado mi ',publicacion.producto,' marca ',publicacion.marca,' por un costo de ',publicacion.precio:2:2,'.');
+	Writeln(mail1,'Felicitaciones, has comprado mi ',publicacion.producto,' Marca ',publicacion.marca,' por un costo de ',publicacion.precio:2:2,'.');
 	Writeln(mail1,'Contactate para coordinar la entrega.');
 	Writeln(mail1,vendedor.NomYApe,vendedor.Telefono);
 	Close(mail1);
@@ -573,13 +570,13 @@ BEGIN
 	Venta.FechaVenta := FechaSistema;
 	Venta.CalifVendedor := 10;	//para poner algo "inválido", después se sobreescribe
 	Venta.CalifComprador := 10;
-	Seek(aVentas,Filesize(aVentas));
+	Seek(aVentas,Filesize(aVentas)); 
 	Write(aVentas,Venta);
 	Close(aVentas);
 END;
 {Procedimiento MercadoLibre de Bugs | Comprar publicacion}
 Procedure ComprarPublic(var Indice : tIndiceUsu;var Publicacion : tPublic;var Comprador : tUsuario;TotalUsu : longint);
-VAR
+VAR 
 	Op : byte;
 	CompraRealizada : boolean;
 	PosVendedor : longint;
@@ -613,7 +610,7 @@ Begin
 		2:	CoordinarConVendedor(Comprador,UsuarioVendedor,Publicacion,compraRealizada);
 	end;
 
-	If CompraRealizada then
+	If CompraRealizada then  
 		CargarVenta(Publicacion,Comprador);
 End;
 {Procedimiento MercadoLibre de Bugs | CONFIGURACION CUENTA}
@@ -929,7 +926,7 @@ Procedure InicioPublicacion(producto:byte; var costo:real; var cantSemanas:byte;
 CONST
 	AutoPorSemana = 25;
 	NotePorSemana = 10;
-	MaxCantSemanasPublic = 10; //HASTA 10 SEMANAS, PUEDE SER MÁS
+	MaxCantSemanasPublic = 10; //HASTA 10 SEMANAS, PUEDE SER MÁS 
 	Descuento = 0.1;
 	Destacada = 1.2;
 VAR
@@ -991,7 +988,7 @@ VAR
 	Pos : longint;
 	EsDestacada : boolean;
 	
-	archAutos : t_ArchAutos;
+	archAutos : t_ArchAutos; 
 	archNote : t_ArchNote;
 BEGIN
 	clrscr();
@@ -1004,7 +1001,7 @@ BEGIN
 	writeln('0)Atras');
 	writeln('');
 	SeleccionOpcion(OpcMenu,MaxOpcion);
-	Pos := Indice[PosicionUsuarioIndice(Usuario.Usuario,TotalUsu,Indice)].pos;
+	Pos := Indice[PosicionUsuarioIndice(Usuario.Usuario,TotalUsu,Indice)].pos; 
 	Saldo := SaldoUsuario(Usuario,Pos); //Obtengo el saldo disponible del usu a traves de la pos(indice)
 	InicioPublicacion(OpcMenu,Costo,CantSemanas,EsDestacada,Saldo);
 	If (CantSemanas <> 0) Then //Si el usu no tiene saldo suficiente pone a cantsemanas como 0 y de aca lo mando a menuppal
@@ -1022,7 +1019,7 @@ END;
 {Procedimiento MercadoLibre de Bugs | FILTRO NOTEBOOK: mostrar}
 Procedure Mostrarnotefiltrados(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
 VAR
-	j,k : integer;
+	j,k : integer; 
 	rnote : t_notebook;
 	aux : byte;
 	publicacion : tpublic;
@@ -1050,25 +1047,25 @@ BEGIN
 			MsjTitulo('Publicaciones filtradas:');
 			writeln('Presione las teclas 4(anterior) y 5(siguiente) respectivamente para navegar entre las paginas');
 			writeln('y seleccione la opcion deseada para comprar:');
-			for j:=1 to 3 do
+			for j:=1 to 3 do 
 			begin
 				if (not(eof(archnote_copia1))) then
 				begin
 					read(archnote_copia1,rnote);		
 					writeln('Opcion ',j,' :');
 					writeln();
-					writeln('marca:', rnote.marca);
-					writeln('descripcion:',rnote.descr);
-					writeln('hd:',rnote.hd);
-					writeln('precio:',rnote.precio:2:2);
-					writeln('publicador:',rnote.usuario);
-					writeln('producto:',rnote.producto);
-					writeln('ram:',rnote.ram);
-					writeln('pantalla:',rnote.pantalla);
+					writeln('Marca :', rnote.marca);
+					writeln('Descripcion :',rnote.descr);
+					writeln('HD :',rnote.hd);
+					writeln('Precio :',rnote.precio:2:2);
+					writeln('Publicador :',rnote.usuario);
+					writeln('Producto :',rnote.producto);
+					writeln('Ram :',rnote.ram);
+					writeln('Pantalla :',rnote.pantalla);
 					writeln();
 				end;
 			end;	
-			writeln('Ingrese opción deseada: ');
+			writeln('Ingrese opcion deseada: ');
 			ValidarByteIngresado(aux,1,5);	
 			case aux of
 				4 : begin
@@ -1081,7 +1078,7 @@ BEGIN
 				end;
 			end;
 		end;
-		case aux of
+		case aux of 
 			1 : begin
 					seek(archnote_copia1,k);
 					read(archnote_copia1,rnote2);
@@ -1121,10 +1118,10 @@ BEGIN
 END;
 {Procedimiento MercadoLibre de Bugs | FILTRO NOTEBOOK: nuevo}
 procedure MenuNote_nuevo(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
-VAR
-	rnote : t_notebook;
+VAR 
+	rnote : t_notebook; 
 	aux : byte;
-	archnote_copia1,archnote_copia2:t_archnote;
+	archnote_copia1,archnote_copia2:t_archnote; 
 BEGIN
 	aux := 0;
 	assign(Archnote_copia1,DataFolder+'Archnote_copia1.dat');	
@@ -1132,15 +1129,15 @@ BEGIN
 	reset(ArchNote_copia1);
 	rewrite(ArchNote_copia2);
 	writeln('Busca un producto nuevo o usado?:');
-	writeln('1)nuevo');
-	writeln('2)usado');
+	writeln('1) Nuevo');
+	writeln('2) Usado');
 	ValidarByteIngresado(aux,1,2);
 	case aux of
 		1 : begin
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.esnuevo = true) then
+				if (rnote.esnuevo = true) then 
 					write(Archnote_copia2, rnote);
 			end;
 		end;
@@ -1148,7 +1145,7 @@ BEGIN
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.esnuevo = false) then
+				if (rnote.esnuevo = false) then 
 					write(Archnote_copia2, rnote);
 			end;
 		end;
@@ -1156,11 +1153,11 @@ BEGIN
 	close(archnote_copia1);
 	close(archnote_copia2);
 	Mostrarnotefiltrados(indice, totalusu, comprador);
-end;
+end; 
 {Procedimiento MercadoLibre de Bugs | FILTRO NOTEBOOK: Pantalla}
 Procedure MenuNote_Pantalla(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
 VAR
-	rnote : t_notebook;
+	rnote : t_notebook; 
 	aux : byte;
 	archnote_copia1,archnote_copia2:t_archnote;
 BEGIN
@@ -1169,7 +1166,7 @@ BEGIN
 	assign(archnote_copia2,DataFolder+'Archnote_copia2.dat');
 	rewrite(ArchNote_copia1);
 	reset(ArchNote_copia2);
-	writeln('Tamano de pantalla?');
+	writeln('Tamanio de pantalla?');
 	writeln('1.13"');
 	writeln('2.14"');
 	writeln('3.15"');
@@ -1181,7 +1178,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.pantalla = '13') then
+				if (rnote.pantalla = '13') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1189,7 +1186,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.pantalla = '14') then
+				if (rnote.pantalla = '14') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1197,7 +1194,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.pantalla = '15') then
+				if (rnote.pantalla = '15') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1205,7 +1202,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.pantalla = '16') then
+				if (rnote.pantalla = '16') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1213,7 +1210,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.pantalla = 'Otro') then
+				if (rnote.pantalla = 'Otro') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1224,10 +1221,10 @@ BEGIN
 end;
 {Procedimiento MercadoLibre de Bugs | FILTRO NOTEBOOK: HD}
 Procedure MenuNote_HD(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
-VAR
-	archnote_copia1,archnote_copia2:t_archnote;
-	aux : byte;
-	rnote : t_notebook;
+VAR 
+	archnote_copia1,archnote_copia2:t_archnote; 
+	aux : byte; 
+	rnote : t_notebook; 
 BEGIN
 	aux := 0;
 	assign(Archnote_copia1,DataFolder+'Archnote_copia1.dat');	
@@ -1242,12 +1239,12 @@ BEGIN
 	writeln('5)2TB');
 	writeln('6)Otra');
 	validarByteIngresado(aux,1,6);
-	case aux of
+	case aux of 
 		1 :	begin
 			while not eof(Archnote_copia1) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.hd = '120GB') then
+				if (rnote.hd = '120GB') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1255,7 +1252,7 @@ BEGIN
 			while not eof(Archnote_copia1) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.hd = '320GB') then
+				if (rnote.hd = '320GB') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1263,7 +1260,7 @@ BEGIN
 			while not eof(Archnote_copia1) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.hd = '500GB') then
+				if (rnote.hd = '500GB') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1271,7 +1268,7 @@ BEGIN
 			while not eof(Archnote_copia1) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.hd = '1TB') then
+				if (rnote.hd = '1TB') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1279,7 +1276,7 @@ BEGIN
 			while not eof(Archnote_copia1) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.hd = '2TB') then
+				if (rnote.hd = '2TB') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1298,10 +1295,10 @@ BEGIN
 END;
 {Procedimiento MercadoLibre de Bugs | FILTRO NOTEBOOK: RAM}
 Procedure MenuNote_Ram(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
-VAR
+VAR 
 	archnote_copia1,archnote_copia2:t_archnote;
-	aux : byte;
-	rnote : t_notebook;
+	aux : byte; 
+	rnote : t_notebook; 
 BEGIN
 	aux := 0; //ram := 0; gb:='gb';
 	assign(Archnote_copia1,DataFolder+'Archnote_copia1.dat');	
@@ -1315,12 +1312,12 @@ BEGIN
 	writeln('4)8Gb');
 	writeln('5)Otro');
 	validarByteIngresado(aux,1,6);
-	case aux of
+	case aux of 
 		1 :	begin
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.ram = '1GB') then
+				if (rnote.ram = '1GB') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1328,7 +1325,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.ram = '2GB') then
+				if (rnote.ram = '2GB') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1336,7 +1333,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.ram = '4GB') then
+				if (rnote.ram = '4GB') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1344,7 +1341,7 @@ BEGIN
 			while not eof(Archnote_copia2) do
 			begin
 				read(Archnote_copia2, rnote);
-				if (rnote.ram = '8GB') then
+				if (rnote.ram = '8GB') then 
 					write(Archnote_copia1, rnote);
 			end;
 			end;
@@ -1363,7 +1360,7 @@ BEGIN
 END;
 {Procedimiento MercadoLibre de Bugs | FILTRO NOTEBOOK: crear archivo}
 procedure Crear_archivo_note();
-VAR
+VAR 
 	rnote : t_notebook;
 	archnote,archnote_copia1{,archnote_copia2}:t_Archnote;
 BEGIN
@@ -1394,8 +1391,8 @@ END;
 Procedure MenuNote_Marca(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
 VAR
 	{archnote,}Archnote_copia1,Archnote_copia2 : t_ArchNote;
-	aux : byte;
-	rnote : t_notebook;
+	aux : byte; 
+	rnote : t_notebook; 
 BEGIN
 	aux := 0;
 	crear_archivo_note;
@@ -1412,12 +1409,12 @@ BEGIN
 	writeln('6.Toshiba');
 	writeln('7.Otra');
 	validarByteIngresado(aux,1,9);
-	case aux of
+	case aux of 
 		1:	begin
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.marca = 'Dell') then
+				if (rnote.marca = 'Dell') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1425,7 +1422,7 @@ BEGIN
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.marca = 'HP Compaq') then
+				if (rnote.marca = 'HP Compaq') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1433,7 +1430,7 @@ BEGIN
 			while (not (eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.marca = 'Lenovo') then
+				if (rnote.marca = 'Lenovo') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1441,7 +1438,7 @@ BEGIN
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.marca = 'Samsung') then
+				if (rnote.marca = 'Samsung') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1449,7 +1446,7 @@ BEGIN
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.marca = 'Sony Vaio') then
+				if (rnote.marca = 'Sony Vaio') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
@@ -1457,11 +1454,11 @@ BEGIN
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1, rnote);
-				if (rnote.marca = 'Toshiba') then
+				if (rnote.marca = 'Toshiba') then 
 					write(Archnote_copia2, rnote);
 			end;
 			end;
-		7 : begin
+		7 : begin 
 			while (not(eof(Archnote_copia1))) do
 			begin
 				read(Archnote_copia1,rnote);
@@ -1476,8 +1473,8 @@ END;
 
 {Procedimiento MercadoLibre de Bugs | FILTRO AUTOS: mostrar}
 Procedure MostrarAutosfiltrados(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
-VAR
-	j,k : integer;
+VAR 
+	j,k : integer; 
 	rauto : t_autos;
 	aux : byte;
 	publicacion : tpublic;
@@ -1504,25 +1501,25 @@ BEGIN
 		seek(ArchAuto_copia1,k);
 		writeln('Presione las teclas 4(anterior) y 5(siguiente) respectivamente para navegar entre las paginas');
 		writeln('y seleccione la opcion deseada para comprar:');
-		for j:=1 to 3 do
+		for j:=1 to 3 do 
 		begin	
 			if not(eof(archauto_copia1)) then
 			begin
 				read(archauto_copia1,rauto);
 				writeln('Opcion',j,' :');
 				writeln();
-				writeln('marca: ', rauto.marca);
-				writeln('descripcion: ',rauto.descr);
-				writeln('anio de fabricacion: ',rauto.anofabricacion);
-				writeln('precio: ',rauto.precio:2:2);
-				writeln('publicador: ',rauto.usuario);
-				writeln('producto: ',rauto.producto);
-				writeln('combustible: ',rauto.combustible);
-				writeln('cantidad de puertas: ',rauto.cantpuertas);
+				writeln('Marca: ', rauto.marca);
+				writeln('Descripcion: ',rauto.descr);
+				writeln('Anio de fabricacion: ',rauto.anofabricacion);
+				writeln('Precio: ',rauto.precio:2:2);
+				writeln('Publicador: ',rauto.usuario);
+				writeln('Producto: ',rauto.producto);
+				writeln('Combustible: ',rauto.combustible);
+				writeln('Cantidad de puertas: ',rauto.cantpuertas);
 				writeln();
 			end;
 		end;	
-		writeln('Ingrese opción deseada: ');
+		writeln('Ingrese opcion deseada: ');
 		ValidarByteIngresado(aux,1,5);	
 		case aux of
 			4: begin
@@ -1535,7 +1532,7 @@ BEGIN
 			end;
 		end;
 	end;		
-	case aux of
+	case aux of 
 		1: begin
 			seek(archauto_copia1,k);
 			read(archauto_copia1,rauto2);
@@ -1590,12 +1587,12 @@ BEGIN
 	writeln('3)5p');
 	writeln('4)ignorar');
 	validarByteIngresado(aux,1,4);
-	case aux of
+	case aux of 
 		1:begin	
 				while (not(eof(ArchAuto_copia2))) do
 				begin
 					read(ArchAuto_copia2, rAutos);
-					if (rAutos.CantPuertas = 3) then
+					if (rAutos.CantPuertas = 3) then 
 						write(ArchAuto_copia1, rAutos);
 				end;
 			end;
@@ -1603,7 +1600,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia2))) do
 				begin
 					read(ArchAuto_copia2, rAutos);
-					if (rAutos.CantPuertas = 4) then
+					if (rAutos.CantPuertas = 4) then 
 						write(ArchAuto_copia1, rAutos);
 				end;
 			end;
@@ -1611,7 +1608,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia2))) do
 				begin
 						read(ArchAuto_copia2, rAutos);
-						if (rAutos.CantPuertas = 5) then
+						if (rAutos.CantPuertas = 5) then 
 							write(ArchAuto_copia1, rAutos);
 				end;
 			end;
@@ -1630,9 +1627,9 @@ END;
 
 {Procedimiento MercadoLibre de Bugs | FILTRO AUTOS: antig}
 Procedure MenuFiltroAuto_antig(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
-VAR
-	rAutos : t_autos;
-	aux : byte;
+VAR 
+	rAutos : t_autos; 
+	aux : byte; 
 	aniomin, aniomax : string[4];
 	ArchAuto_copia1,ArchAuto_copia2 : t_archautos;
 BEGIN
@@ -1646,8 +1643,8 @@ BEGIN
 	writeln('1)Si');
 	writeln('2)No');
 	validarByteIngresado(aux,1,2);
-	if (aux = 1) then
-	begin
+	if (aux = 1) then 
+	begin 
 		writeln('Ingrese el anio minimo entre los cuales desea buscar el producto: ');
 		readln(aniomin);
 		writeln('Ingrese el anio de maximo entre los cuales desea buscar el producto: ');
@@ -1659,7 +1656,7 @@ BEGIN
 				write(ArchAuto_copia2, rAutos);
 		end;
 	end
-	else if aux = 2 then
+	else if aux = 2 then 
 	begin
 		while (not(eof(ArchAuto_copia1))) do
 			begin
@@ -1676,7 +1673,7 @@ END;
 Procedure MenuFiltroCombustible(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
 VAR
 	ArchAuto_copia1,ArchAuto_copia2 : t_ArchAutos;
-	rAutos : t_Autos;
+	rAutos : t_Autos; 
 	aux : byte;
 BEGIN
 	aux := 0;
@@ -1689,12 +1686,12 @@ BEGIN
 	writeln('2)GNC');
 	writeln('3)Nafta');
 	validarByteIngresado(aux,1,3);
-	case aux of
+	case aux of 
 		1 : begin
 				while (not(eof(ArchAuto_copia2))) do
 				begin
 					read(ArchAuto_copia2, rAutos);
-					if (rAutos.combustible = 'Diesel') then
+					if (rAutos.combustible = 'Diesel') then 
 						write(ArchAuto_copia1, rAutos);
 				end;
 			end;
@@ -1702,7 +1699,7 @@ BEGIN
 				while not eof(ArchAuto_copia2) do
 				begin
 					read(ArchAuto_copia2, rAutos);
-					if (rAutos.combustible = 'GNC') then
+					if (rAutos.combustible = 'GNC') then 
 						write(ArchAuto_copia1, rAutos);
 				end;
 			end;
@@ -1710,7 +1707,7 @@ BEGIN
 				while not eof(ArchAuto_copia2) do
 				begin
 					read(ArchAuto_copia2, rAutos);
-					if (rAutos.combustible = 'Nafta') then
+					if (rAutos.combustible = 'Nafta') then 
 						write(ArchAuto_copia1, rAutos);
 				end;
 			end;
@@ -1752,9 +1749,9 @@ END;
 
 {Procedimiento MercadoLibre de Bugs | FILTRO AUTOS: marcas}
 Procedure MenuFiltroAuto_Marcas(var indice:tindiceusu;var totalusu:longint; var comprador:tusuario);
-VAR
-	aux : byte;
-	rAutos : t_Autos;
+VAR 
+	aux : byte; 
+	rAutos : t_Autos; 
 	{ArchAuto , }ArchAuto_copia1, ArchAuto_copia2 : t_ArchAutos;
 BEGIN
 	aux := 0;
@@ -1775,7 +1772,7 @@ BEGIN
 	writeln('8)Volkswagen');
 	writeln('9)Otra');
 	validarByteIngresado(aux,1,9);
-	case aux of
+	case aux of 
 		1: begin
 				while (not(eof(ArchAuto_copia1))) do
 				begin
@@ -1788,7 +1785,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Citroen') then
+					if (rAutos.marca = 'Citroen') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1796,7 +1793,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if rAutos.marca = 'Fiat' then
+					if rAutos.marca = 'Fiat' then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1804,7 +1801,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Ford') then
+					if (rAutos.marca = 'Ford') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1812,7 +1809,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Mercedes Benz') then
+					if (rAutos.marca = 'Mercedes Benz') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1820,7 +1817,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Peugeot') then
+					if (rAutos.marca = 'Peugeot') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1828,7 +1825,7 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Renault') then
+					if (rAutos.marca = 'Renault') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1836,15 +1833,15 @@ BEGIN
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Volkswagen') then
+					if (rAutos.marca = 'Volkswagen') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
-		9: begin
+		9: begin 
 				while (not(eof(ArchAuto_copia1))) do
 				begin
 					read(ArchAuto_copia1, rAutos);
-					if (rAutos.marca = 'Otra') then
+					if (rAutos.marca = 'Otra') then 
 						write(ArchAuto_copia2, rAutos);
 				end;
 			end;
@@ -1856,15 +1853,15 @@ END;
 
 {Procedimiento MercadoLibre de Bugs | VER PUBLICACIONES}
 Procedure VerPublic(var Indice : tIndiceUsu; var TotalUsu : longint; var Comprador : tUsuario);
-VAR
+VAR 
 	aux : byte;
-BEGIN
+BEGIN 
 	aux := 0;
 	writeln('Presione el numero correspondiente a la opcion mas acorde al producto que busca:');
 	writeln('1) Automovil');
 	writeln('2) Notebook');
 	writeln('3) volver');
-	validarByteIngresado(aux,1,3);
+	validarByteIngresado(aux,1,3); 
 	case aux of
 	 1: MenuFiltroAuto_marcas(indice, totalusu ,comprador);
 	 2: MenuNote_marca(indice, totalusu ,comprador);
@@ -2013,7 +2010,7 @@ BEGIN
 	{Escribo el archivo de saldos para este usuario}
 	Assign(ArchivoDeSaldos, DataFolder + 'ArchSaldos.dat');
 	{$I-}
-	Reset(ArchivoDeSaldos);
+	Reset(ArchivoDeSaldos); 
 	{$I+}
 	If (IOResult <> 0) then Rewrite(ArchivoDeSaldos);
 	UnSaldo.Usuario := UnUsuario.Usuario;
@@ -2086,7 +2083,7 @@ BEGIN
 		write('Por favor ingrese su contrase',#164,'a: ');
 		readln(StrPass);
 		If (ValidoLength(StrPass,MaxLengthPass)) Then
-			if (not (EsClaveCorrecta(Indice,StrPass,auxPos))) then
+			if (not (EsClaveCorrecta(Indice,StrPass,auxPos))) then 
 			BEGIN
 				MsjError('La contrasenia no es correcta.');
 				EsValido := false;
