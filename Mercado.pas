@@ -6,7 +6,7 @@
 * Gabriela Azcona - Sofia Morseletto - Mariano Stinson - Leandro Desuque - Leandro Devesa
 *
 }
-program MercadoLibreBugs;
+PROGRAM MercadoLibreBugs;
 USES crt,Validaciones;
 CONST
   Amarillo = 14;
